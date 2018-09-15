@@ -1,43 +1,47 @@
- 
+/*
+
+used in project construction :https://www.hackster.io/Aritro
+
+edited and developed by: https://github.com/bymfd
+
+This repo:https://github.com/bymfd/fedai
+*/
+ int IN3 = 4; 
+int IN4 = 3;
+int led=13;
 #include <SPI.h>
 #include <MFRC522.h>
-
-
-int IN3 = 4; 
-int IN4 = 3;
-
  
 #define SS_PIN 10
 #define RST_PIN 9
-MFRC522 mfrc522(SS_PIN, RST_PIN);   
+MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
  
 void setup() 
 {
-   pinMode (IN3, OUTPUT);
-  pinMode (IN4, OUTPUT);
-
-  
-  Serial.begin(9600);   
-  SPI.begin();      
-  mfrc522.PCD_Init();   
-  Serial.println("karti yanastir...");
+  pinMode (led, OUTPUT); 
+  pinMode (IN3, OUTPUT);
+pinMode (IN4, OUTPUT);
+  Serial.begin(9600);   // Initiate a serial communication
+  SPI.begin();      // Initiate  SPI bus
+  mfrc522.PCD_Init();   // Initiate MFRC522
+  Serial.println("wait card...");
   Serial.println();
 
 }
 void loop() 
 {
-  // yeni karta bak
+  // Look for new cards
   if ( ! mfrc522.PICC_IsNewCardPresent()) 
   {
     return;
   }
-  // birini seç
+  // Select one of the cards
   if ( ! mfrc522.PICC_ReadCardSerial()) 
   {
     return;
   }
-  //kart idsi
-  Serial.print("kart id :");
+  //Show UID on serial monitor
+  Serial.print("card UID :");
   String content= "";
   byte letter;
   for (byte i = 0; i < mfrc522.uid.size; i++) 
@@ -48,47 +52,61 @@ void loop()
      content.concat(String(mfrc522.uid.uidByte[i], HEX));
   }
   Serial.println();
-  Serial.print("Durum : ");
+  Serial.print("message: ");
   content.toUpperCase();
-  if (content.substring(1) == "55 9E D9 E2") 
+  if (content.substring(1) == "55 9E D9 E2" ) //change here the UID of the card/cards that you want to give access
   {
-    Serial.println("giris onaylandi");
+    Serial.println("Welcome!!!");
     Serial.println();
-    yukari();
-    delay(3000);
     asagi();
+    digitalWrite (IN4, HIGH);
+    Serial.println("Asagi");
+    delay(5000);
+    Serial.println("yukari");
+    digitalWrite (IN4, LOW);
+    
   }
  
  else   {
-    Serial.println("ded yalli gidi");
-    Serial.println();
-    delay(3000);
+    Serial.println("invalid card");
+    delay(500);
+    digitalWrite (IN3, HIGH);
+    delay(500);
+    digitalWrite (IN3, LOW);
+    delay(500);
+    digitalWrite (IN3, HIGH);
+    delay(500);
+    digitalWrite (IN3, LOW);
+    delay(500);
+    digitalWrite (IN3, HIGH);
+    delay(500);
+    digitalWrite (IN3, LOW);
   }
 }
+
 
 
 void yukari()
 {
   digitalWrite (IN4, LOW); 
 digitalWrite (IN3, HIGH);
- 
+digitalWrite (led,LOW); 
 delay(50);
-
+digitalWrite (led,HIGH);
 delay(1000);
 digitalWrite (IN3,LOW);
 digitalWrite (IN4,LOW);
-durum=1;
+
 } 
 void asagi()
 {
  digitalWrite (IN3,LOW);
 digitalWrite (IN4, HIGH); 
-
+digitalWrite (led,LOW);
 delay(50); 
- 
+ digitalWrite (led,HIGH);
  delay(1000);
 digitalWrite (IN4,LOW); 
-durum=2;
-}
 
+}
 
