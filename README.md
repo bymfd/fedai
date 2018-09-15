@@ -14,11 +14,11 @@ You can find your used RFID library here: https://github.com/AritroMukherjee/RFI
 
 
 Used electronic material list:
-*Arduino uno
-*RFID-RC522
-*CAR LOCK SYSTEM MOTOR (12v "DC MOTOR")
-*12V ADAPTOR
-*L298NDC Stepper Motor Driver Module 
++Arduino uno
++RFID-RC522
++CAR LOCK SYSTEM MOTOR (12v "DC MOTOR")
++12V ADAPTOR
++L298NDC Stepper Motor Driver Module 
 
 
 # All done enjoy ...
