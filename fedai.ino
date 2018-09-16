@@ -56,7 +56,7 @@ void loop()
   Serial.println();
   Serial.print("message: ");
   content.toUpperCase();
-  if (content.substring(1) == "55 9E D9 E2" || content.substring(1) == "80 6F DF B0" || content.substring(1) == "4A 41 56 D3" ) //change here the UID of the card/cards that you want to give access
+  if (content.substring(1) == "55 9E D9 E2" || content.substring(1) == "80 6F DF B0" || content.substring(1) == "40 48 31 A5" || content.substring(1) == "4A 41 56 D3" ) //change here the UID of the card/cards that you want to give access
   {
 
 
