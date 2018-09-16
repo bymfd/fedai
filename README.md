@@ -22,6 +22,8 @@ CAR LOCK SYSTEM MOTOR (12v "DC MOTOR")
 
 12V ADAPTOR
 
+pioze Buzzer 
+
 L298NDC Stepper Motor Driver Module 
 
 
